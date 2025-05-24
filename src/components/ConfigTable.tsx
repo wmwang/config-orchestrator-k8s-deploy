@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Edit2, Trash2, Deploy, Settings } from 'lucide-react';
+import { Edit2, Trash2, Rocket, Settings } from 'lucide-react';
 import { ConfigItem } from '@/types/config';
 
 interface ConfigTableProps {
@@ -74,7 +74,7 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
                         onClick={() => onDeploy(config)}
                         className="h-8 w-8 p-0 hover:bg-green-500/20 hover:text-green-400"
                       >
-                        <Deploy className="h-4 w-4" />
+                        <Rocket className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="ghost"
