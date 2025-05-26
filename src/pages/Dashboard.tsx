@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -98,15 +99,15 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="container mx-auto p-6 space-y-6">
         {/* 頁面標題 */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-slate-100 dark:text-slate-100 text-slate-900 mb-2">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
               配置管理儀表板
             </h1>
-            <p className="text-slate-400 dark:text-slate-400 text-slate-600">
+            <p className="text-slate-600 dark:text-slate-400">
               統一管理所有應用程式配置，支援 K8s 集群部署
             </p>
           </div>
@@ -116,12 +117,12 @@ const Dashboard = () => {
         {/* 總體統計 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {overallStats.map((stat, index) => (
-            <Card key={index} className="bg-slate-800/50 border-slate-700 dark:bg-slate-800/50 dark:border-slate-700 bg-white border-slate-200">
+            <Card key={index} className="bg-white border-slate-200 dark:bg-slate-800/50 dark:border-slate-700">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-slate-400 dark:text-slate-400 text-slate-600 text-sm font-medium">{stat.title}</p>
-                    <p className="text-2xl font-bold text-slate-100 dark:text-slate-100 text-slate-900">{stat.value}</p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">{stat.title}</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stat.value}</p>
                   </div>
                   <stat.icon className={`h-8 w-8 ${stat.color}`} />
                 </div>
@@ -131,9 +132,9 @@ const Dashboard = () => {
         </div>
 
         {/* 應用程式列表 */}
-        <Card className="bg-slate-800/50 border-slate-700 dark:bg-slate-800/50 dark:border-slate-700 bg-white border-slate-200">
+        <Card className="bg-white border-slate-200 dark:bg-slate-800/50 dark:border-slate-700">
           <CardHeader>
-            <CardTitle className="text-slate-100 dark:text-slate-100 text-slate-900 flex items-center gap-2">
+            <CardTitle className="text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Server className="h-5 w-5" />
               應用程式列表
             </CardTitle>
@@ -141,15 +142,15 @@ const Dashboard = () => {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {Object.entries(applicationStats).map(([appName, stats]) => (
-                <Card key={appName} className="bg-slate-700/50 border-slate-600 hover:bg-slate-700/70 dark:bg-slate-700/50 dark:border-slate-600 dark:hover:bg-slate-700/70 bg-slate-50 border-slate-200 hover:bg-slate-100 transition-colors">
+                <Card key={appName} className="bg-slate-50 border-slate-200 hover:bg-slate-100 dark:bg-slate-700/50 dark:border-slate-600 dark:hover:bg-slate-700/70 transition-colors">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-lg font-semibold text-slate-100 dark:text-slate-100 text-slate-900">{appName}</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{appName}</h3>
                       <Button
                         asChild
                         variant="ghost"
                         size="sm"
-                        className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/20 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-500/20 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                        className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-500/20"
                       >
                         <Link to={`/app/${appName}`}>
                           <ArrowRight className="h-4 w-4" />
@@ -159,19 +160,19 @@ const Dashboard = () => {
                     
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 dark:text-slate-400 text-slate-600">總配置:</span>
-                        <span className="text-slate-200 dark:text-slate-200 text-slate-800 font-medium">{stats.total}</span>
+                        <span className="text-slate-600 dark:text-slate-400">總配置:</span>
+                        <span className="text-slate-800 dark:text-slate-200 font-medium">{stats.total}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 dark:text-slate-400 text-slate-600">已部署:</span>
+                        <span className="text-slate-600 dark:text-slate-400">已部署:</span>
                         <span className="text-green-400 font-medium">{stats.deployed}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 dark:text-slate-400 text-slate-600">待處理:</span>
+                        <span className="text-slate-600 dark:text-slate-400">待處理:</span>
                         <span className="text-yellow-400 font-medium">{stats.pending}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 dark:text-slate-400 text-slate-600">啟用中:</span>
+                        <span className="text-slate-600 dark:text-slate-400">啟用中:</span>
                         <span className="text-purple-400 font-medium">{stats.active}</span>
                       </div>
                     </div>
