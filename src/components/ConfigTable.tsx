@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Edit2, Trash2, Rocket, Settings } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Edit2, Trash2, Rocket, Settings, ListFilter } from 'lucide-react';
 import { ConfigItem } from '@/types/config';
 
 interface ConfigTableProps {
@@ -14,6 +15,22 @@ interface ConfigTableProps {
 }
 
 const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, onDeploy }) => {
+  const [selectedLabel, setSelectedLabel] = useState<string>('all');
+
+  // 取得所有唯一的標籤
+  const uniqueLabels = useMemo(() => {
+    const labels = Array.from(new Set(configs.map(config => config.label)));
+    return labels.sort();
+  }, [configs]);
+
+  // 根據選擇的標籤篩選配置
+  const filteredConfigs = useMemo(() => {
+    if (selectedLabel === 'all') {
+      return configs;
+    }
+    return configs.filter(config => config.label === selectedLabel);
+  }, [configs, selectedLabel]);
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-green-500/20 text-green-400 border-green-500/50';
@@ -26,10 +43,43 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
   return (
     <Card className="bg-slate-800/50 border-slate-700">
       <CardHeader>
-        <CardTitle className="text-slate-100 flex items-center gap-2">
-          <Settings className="h-5 w-5" />
-          配置項目管理
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-slate-100 flex items-center gap-2">
+            <Settings className="h-5 w-5" />
+            配置項目管理
+          </CardTitle>
+          <div className="flex items-center gap-2">
+            <ListFilter className="h-4 w-4 text-slate-400" />
+            <Select value={selectedLabel} onValueChange={setSelectedLabel}>
+              <SelectTrigger className="w-[180px] bg-slate-700 border-slate-600 text-slate-200">
+                <SelectValue placeholder="篩選標籤" />
+              </SelectTrigger>
+              <SelectContent className="bg-slate-700 border-slate-600">
+                <SelectItem value="all" className="text-slate-200 focus:bg-slate-600">
+                  全部標籤
+                </SelectItem>
+                {uniqueLabels.map((label) => (
+                  <SelectItem 
+                    key={label} 
+                    value={label}
+                    className="text-slate-200 focus:bg-slate-600"
+                  >
+                    {label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        {selectedLabel !== 'all' && (
+          <div className="flex items-center gap-2 text-sm text-slate-400">
+            <span>篩選結果:</span>
+            <Badge variant="outline" className="text-slate-300 border-slate-600">
+              {selectedLabel}
+            </Badge>
+            <span>({filteredConfigs.length} 項配置)</span>
+          </div>
+        )}
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
@@ -46,7 +96,7 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
               </tr>
             </thead>
             <tbody>
-              {configs.map((config) => (
+              {filteredConfigs.map((config) => (
                 <tr key={config.id} className="border-b border-slate-700/50 hover:bg-slate-700/30 transition-colors">
                   <td className="p-3 text-slate-200 font-medium">{config.application}</td>
                   <td className="p-3 text-slate-300">{config.profile}</td>
@@ -90,6 +140,11 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
               ))}
             </tbody>
           </table>
+          {filteredConfigs.length === 0 && (
+            <div className="text-center py-8 text-slate-400">
+              沒有找到符合篩選條件的配置項目
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>
