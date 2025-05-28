@@ -118,7 +118,7 @@ const ApplicationConfig = () => {
     if (selectedConfig) {
       setConfigs(prev => prev.map(config => 
         config.id === selectedConfig.id 
-          ? { ...config, status: deploymentOption.type === 'immediate' ? 'deployed' : 'pending' }
+          ? { ...config, status: deploymentOption.type === 'immediate' ? 'deployed' : 'schedule' as 'deployed' | 'draft' | 'schedule' }
           : config
       ));
 

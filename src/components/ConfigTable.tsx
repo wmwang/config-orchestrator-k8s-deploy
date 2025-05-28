@@ -162,7 +162,12 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
                         variant="ghost"
                         size="sm"
                         onClick={() => onDeploy(config)}
-                        className="h-8 w-8 p-0 hover:bg-green-500/20 hover:text-green-400"
+                        disabled={config.status === 'deployed'}
+                        className={`h-8 w-8 p-0 ${
+                          config.status === 'deployed' 
+                            ? 'opacity-50 cursor-not-allowed' 
+                            : 'hover:bg-green-500/20 hover:text-green-400'
+                        }`}
                       >
                         <Rocket className="h-4 w-4" />
                       </Button>

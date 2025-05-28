@@ -1,55 +1,59 @@
-
 import React, { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Server, Database, Settings, Activity } from 'lucide-react';
+import { Plus, ArrowLeft, Server, Database, Settings, Activity } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import ConfigTable from '@/components/ConfigTable';
 import ConfigDialog from '@/components/ConfigDialog';
 import DeploymentDialog from '@/components/DeploymentDialog';
 import { ConfigItem, DeploymentOption } from '@/types/config';
 
-const Index = () => {
-  const { toast } = useToast();
-  const [configs, setConfigs] = useState<ConfigItem[]>([
-    {
-      id: '1',
-      application: 'user-service',
-      profile: 'production',
-      label: 'v1.2.0',
-      options: '--reload',
-      key: 'database.host',
-      config: 'postgresql://prod-db:5432/userdb',
-      createdAt: '2024-01-15T10:30:00Z',
-      updatedAt: '2024-01-20T14:45:00Z',
-      status: 'deployed'
-    },
-    {
-      id: '2',
-      application: 'api-gateway',
-      profile: 'staging',
-      label: 'v2.1.0',
-      options: '--debug',
-      key: 'redis.cache.ttl',
-      config: '3600',
-      createdAt: '2024-01-18T09:15:00Z',
-      updatedAt: '2024-01-22T11:20:00Z',
-      status: 'active'
-    },
-    {
-      id: '3',
-      application: 'auth-service',
-      profile: 'development',
-      label: 'v1.0.0-beta',
-      options: '--hot-reload',
-      key: 'jwt.secret',
-      config: 'dev-secret-key-change-in-prod',
-      createdAt: '2024-01-20T16:00:00Z',
-      updatedAt: '2024-01-23T08:30:00Z',
-      status: 'pending'
-    }
-  ]);
+// 模擬數據 - 實際應用中這些數據會從API獲取
+const mockConfigs: ConfigItem[] = [
+  {
+    id: '1',
+    application: 'user-service',
+    profile: 'production',
+    label: 'v1.2.0',
+    options: '--reload',
+    key: 'database.host',
+    config: 'postgresql://prod-db:5432/userdb',
+    createdAt: '2024-01-15T10:30:00Z',
+    updatedAt: '2024-01-20T14:45:00Z',
+    status: 'deployed'
+  },
+  {
+    id: '2',
+    application: 'api-gateway',
+    profile: 'staging',
+    label: 'v2.1.0',
+    options: '--debug',
+    key: 'redis.cache.ttl',
+    config: '3600',
+    createdAt: '2024-01-18T09:15:00Z',
+    updatedAt: '2024-01-22T11:20:00Z',
+    status: 'draft'
+  },
+  {
+    id: '3',
+    application: 'auth-service',
+    profile: 'development',
+    label: 'v1.0.0-beta',
+    options: '--hot-reload',
+    key: 'jwt.secret',
+    config: 'dev-secret-key-change-in-prod',
+    createdAt: '2024-01-20T16:00:00Z',
+    updatedAt: '2024-01-23T08:30:00Z',
+    status: 'schedule'
+  }
+];
 
+const Index = () => {
+  const { appName } = useParams<{ appName: string }>();
+  const { toast } = useToast();
+  
+  const [configs, setConfigs] = useState<ConfigItem[]>(mockConfigs);
   const [configDialogOpen, setConfigDialogOpen] = useState(false);
   const [deploymentDialogOpen, setDeploymentDialogOpen] = useState(false);
   const [selectedConfig, setSelectedConfig] = useState<ConfigItem | null>(null);
@@ -68,7 +72,6 @@ const Index = () => {
     const now = new Date().toISOString();
     
     if (selectedConfig) {
-      // 更新現有配置
       setConfigs(prev => prev.map(config => 
         config.id === selectedConfig.id 
           ? { ...config, ...configData, updatedAt: now }
@@ -79,9 +82,9 @@ const Index = () => {
         description: `已更新配置項目: ${configData.key}`,
       });
     } else {
-      // 新增配置
       const newConfig: ConfigItem = {
         ...configData,
+        application: appName || '',
         id: Date.now().toString(),
         createdAt: now,
         updatedAt: now
@@ -111,10 +114,9 @@ const Index = () => {
 
   const handleDeploy = (deploymentOption: DeploymentOption) => {
     if (selectedConfig) {
-      // 更新配置狀態
       setConfigs(prev => prev.map(config => 
         config.id === selectedConfig.id 
-          ? { ...config, status: deploymentOption.type === 'immediate' ? 'deployed' : 'pending' }
+          ? { ...config, status: deploymentOption.type === 'immediate' ? 'deployed' : 'schedule' as 'deployed' | 'draft' | 'schedule' }
           : config
       ));
 
@@ -143,31 +145,33 @@ const Index = () => {
       color: "text-green-400"
     },
     {
-      title: "待處理",
-      value: configs.filter(c => c.status === 'pending').length,
+      title: "排程中",
+      value: configs.filter(c => c.status === 'schedule').length,
       icon: Activity,
       color: "text-yellow-400"
     },
     {
-      title: "啟用中",
-      value: configs.filter(c => c.status === 'active').length,
+      title: "草稿",
+      value: configs.filter(c => c.status === 'draft').length,
       icon: Settings,
-      color: "text-purple-400"
+      color: "text-gray-400"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="container mx-auto p-6 space-y-6">
-        {/* 頁面標題 */}
+        {/* 導航和標題 */}
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-100 mb-2">
-              配置管理中心
-            </h1>
-            <p className="text-slate-400">
-              統一管理應用程式配置，支援 K8s 集群部署
-            </p>
+          <div className="flex items-center gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-slate-100 mb-2">
+                配置管理儀表板
+              </h1>
+              <p className="text-slate-400">
+                集中管理所有應用程式的配置
+              </p>
+            </div>
           </div>
           <Button
             onClick={handleAddConfig}
