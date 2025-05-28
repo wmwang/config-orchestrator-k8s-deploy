@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Database, Server, Settings, Activity } from 'lucide-react';
 import { ConfigItem } from '@/types/config';
 import DashboardTable from '@/components/DashboardTable';
+import ThemeToggle from '@/components/ThemeToggle';
 import { useToast } from "@/hooks/use-toast"
 
 const mockConfigs: ConfigItem[] = [
@@ -80,6 +82,11 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="container mx-auto p-6 space-y-6">
+        {/* Theme Toggle - positioned at top right */}
+        <div className="flex justify-end">
+          <ThemeToggle />
+        </div>
+
         {/* Header */}
         <div className="text-center">
           <h1 className="text-3xl font-bold text-slate-100 mb-2">
