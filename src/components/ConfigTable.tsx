@@ -17,20 +17,33 @@ interface ConfigTableProps {
 
 const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, onDeploy }) => {
   const [selectedLabel, setSelectedLabel] = useState<string>('all');
+  const [selectedEnvironment, setSelectedEnvironment] = useState<string>('all');
 
   // 取得所有唯一的標籤
   const uniqueLabels = useMemo(() => {
     const labels = Array.from(new Set(configs.map(config => config.label)));
     return labels.sort();
   }, [configs]);
+  // 取得所有唯一的環境
+  const uniqueEnvironments = useMemo(() => {
+    const environments = Array.from(new Set(configs.map(config => config.profile)));
+    return environments.sort();
+  }, [configs]);
 
-  // 根據選擇的標籤篩選配置
+  // 根據選擇的標籤和環境篩選配置
   const filteredConfigs = useMemo(() => {
-    if (selectedLabel === 'all') {
-      return configs;
+    let filtered = configs;
+    
+    if (selectedLabel !== 'all') {
+      filtered = filtered.filter(config => config.label === selectedLabel);
     }
-    return configs.filter(config => config.label === selectedLabel);
-  }, [configs, selectedLabel]);
+    
+    if (selectedEnvironment !== 'all') {
+      filtered = filtered.filter(config => config.profile === selectedEnvironment);
+    }
+    
+    return filtered;
+  }, [configs, selectedLabel, selectedEnvironment]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -52,6 +65,24 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <ListFilter className="h-4 w-4 text-muted-foreground" />
+            <Select value={selectedEnvironment} onValueChange={setSelectedEnvironment}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="篩選環境" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">
+                  全部環境
+                </SelectItem>
+                {uniqueEnvironments.map((environment) => (
+                  <SelectItem 
+                    key={environment} 
+                    value={environment}
+                  >
+                    {environment}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <Select value={selectedLabel} onValueChange={setSelectedLabel}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="篩選標籤" />
@@ -123,6 +154,7 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
                         variant="ghost"
                         size="sm"
                         onClick={() => onDeploy(config)}
+                        disabled={config.status === 'deployed'}
                         className="h-8 w-8 p-0 hover:bg-green-500/20 hover:text-green-400"
                       >
                         <Rocket className="h-4 w-4" />

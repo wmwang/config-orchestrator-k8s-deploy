@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,48 +7,35 @@ import { ConfigItem } from '@/types/config';
 import ThemeToggle from '@/components/ThemeToggle';
 
 // 模擬數據 - 實際應用中這些數據會從API獲取
-const mockConfigs: ConfigItem[] = [
-  {
-    id: '1',
-    application: 'user-service',
-    profile: 'production',
-    label: 'v1.2.0',
-    options: '--reload',
-    key: 'database.host',
-    config: 'postgresql://prod-db:5432/userdb',
-    createdAt: '2024-01-15T10:30:00Z',
-    updatedAt: '2024-01-20T14:45:00Z',
-    status: 'deployed'
-  },
-  {
-    id: '2',
-    application: 'api-gateway',
-    profile: 'staging',
-    label: 'v2.1.0',
-    options: '--debug',
-    key: 'redis.cache.ttl',
-    config: '3600',
-    createdAt: '2024-01-18T09:15:00Z',
-    updatedAt: '2024-01-22T11:20:00Z',
-    status: 'active'
-  },
-  {
-    id: '3',
-    application: 'auth-service',
-    profile: 'development',
-    label: 'v1.0.0-beta',
-    options: '--hot-reload',
-    key: 'jwt.secret',
-    config: 'dev-secret-key-change-in-prod',
-    createdAt: '2024-01-20T16:00:00Z',
-    updatedAt: '2024-01-23T08:30:00Z',
-    status: 'pending'
-  }
-];
 
 const Dashboard = () => {
+
+  const [configs, setConfigs] = useState<ConfigItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchConfigs = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/configs');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setConfigs(data);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchConfigs();
+  }, []); // Empty dependency array ensures this runs once on mount
+
+
   // 統計各應用程式的配置數量
-  const applicationStats = mockConfigs.reduce((acc, config) => {
+  const applicationStats = configs.reduce((acc, config) => {
     if (!acc[config.application]) {
       acc[config.application] = {
         total: 0,
@@ -65,10 +51,10 @@ const Dashboard = () => {
 
   const totalStats = {
     applications: Object.keys(applicationStats).length,
-    totalConfigs: mockConfigs.length,
-    deployed: mockConfigs.filter(c => c.status === 'deployed').length,
-    pending: mockConfigs.filter(c => c.status === 'pending').length,
-    active: mockConfigs.filter(c => c.status === 'active').length
+    totalConfigs: configs.length,
+    deployed: configs.filter(c => c.status === 'deployed').length,
+    pending: configs.filter(c => c.status === 'pending').length,
+    active: configs.filter(c => c.status === 'active').length
   };
 
   const overallStats = [
