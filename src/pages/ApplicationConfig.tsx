@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -34,7 +33,7 @@ const mockConfigs: ConfigItem[] = [
     config: '3600',
     createdAt: '2024-01-18T09:15:00Z',
     updatedAt: '2024-01-22T11:20:00Z',
-    status: 'active'
+    status: 'draft'
   },
   {
     id: '3',
@@ -46,7 +45,7 @@ const mockConfigs: ConfigItem[] = [
     config: 'dev-secret-key-change-in-prod',
     createdAt: '2024-01-20T16:00:00Z',
     updatedAt: '2024-01-23T08:30:00Z',
-    status: 'pending'
+    status: 'schedule'
   }
 ];
 
@@ -148,16 +147,16 @@ const ApplicationConfig = () => {
       color: "text-green-400"
     },
     {
-      title: "待處理",
-      value: configs.filter(c => c.status === 'pending').length,
+      title: "排程中",
+      value: configs.filter(c => c.status === 'schedule').length,
       icon: Activity,
       color: "text-yellow-400"
     },
     {
-      title: "啟用中",
-      value: configs.filter(c => c.status === 'active').length,
+      title: "草稿",
+      value: configs.filter(c => c.status === 'draft').length,
       icon: Settings,
-      color: "text-purple-400"
+      color: "text-gray-400"
     }
   ];
 

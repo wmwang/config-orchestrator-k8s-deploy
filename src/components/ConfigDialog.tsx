@@ -23,7 +23,7 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
     options: '',
     key: '',
     config: '',
-    status: 'active' as 'active' | 'pending' | 'deployed'
+    status: 'draft' as 'deployed' | 'draft' | 'schedule'
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
         options: '',
         key: '',
         config: '',
-        status: 'active'
+        status: 'draft'
       });
     }
   }, [config, open]);
@@ -139,8 +139,8 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="active">啟用中</SelectItem>
-                <SelectItem value="pending">待處理</SelectItem>
+                <SelectItem value="draft">草稿</SelectItem>
+                <SelectItem value="schedule">排程</SelectItem>
                 <SelectItem value="deployed">已部署</SelectItem>
               </SelectContent>
             </Select>

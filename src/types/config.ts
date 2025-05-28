@@ -1,4 +1,3 @@
-
 export interface ConfigItem {
   id: string;
   application: string;
@@ -9,7 +8,7 @@ export interface ConfigItem {
   config: string;
   createdAt: string;
   updatedAt: string;
-  status: 'active' | 'pending' | 'deployed';
+  status: 'deployed' | 'draft' | 'schedule';
 }
 
 export interface DeploymentOption {
