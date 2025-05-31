@@ -47,9 +47,8 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-500/20 text-green-400 border-green-500/50';
-      case 'pending': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
-      case 'deployed': return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
+      case 'enable': return 'bg-green-500/20 text-green-400 border-green-500/50';
+      case 'disable': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
       default: return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
     }
   };
@@ -121,8 +120,8 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
                 <th className="text-left p-3 font-medium">應用程式</th>
                 <th className="text-left p-3 font-medium">環境</th>
                 <th className="text-left p-3 font-medium">標籤</th>
-                <th className="text-left p-3 font-medium">選項</th>
-                <th className="text-left p-3 font-medium">鍵值</th>
+                <th className="text-left p-3 font-medium">鍵</th>
+                <th className="text-left p-3 font-medium">值</th>
                 <th className="text-left p-3 font-medium">狀態</th>
                 <th className="text-left p-3 font-medium">操作</th>
               </tr>
@@ -133,8 +132,8 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
                   <td className="p-3 font-medium">{config.application}</td>
                   <td className="p-3 text-muted-foreground">{config.profile}</td>
                   <td className="p-3 text-muted-foreground">{config.label}</td>
-                  <td className="p-3 text-muted-foreground">{config.options}</td>
                   <td className="p-3 text-muted-foreground font-mono text-sm">{config.key}</td>
+                  <td className="p-3 text-muted-foreground font-mono text-sm">{config.value}</td>
                   <td className="p-3">
                     <Badge className={getStatusColor(config.status)}>
                       {config.status}
@@ -154,7 +153,7 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
                         variant="ghost"
                         size="sm"
                         onClick={() => onDeploy(config)}
-                        disabled={config.status === 'deployed'}
+                        disabled={config.status === 'enable'}
                         className="h-8 w-8 p-0 hover:bg-green-500/20 hover:text-green-400"
                       >
                         <Rocket className="h-4 w-4" />

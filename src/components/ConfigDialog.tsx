@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -16,14 +15,14 @@ interface ConfigDialogProps {
 }
 
 const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config, onSave }) => {
+  // 1. 修改初始狀態，將 profile 預設為 'dev'
   const [formData, setFormData] = useState({
     application: '',
-    profile: '',
-    label: '',
-    options: '',
+    profile: 'prod',
+    label: ' latest',
     key: '',
-    config: '',
-    status: 'active' as 'active' | 'pending' | 'deployed'
+    value: '',
+    status: 'disable'
   });
 
   useEffect(() => {
@@ -32,20 +31,19 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
         application: config.application,
         profile: config.profile,
         label: config.label,
-        options: config.options,
         key: config.key,
-        config: config.config,
+        value: config.value,
         status: config.status
       });
     } else {
+      // 2. 當新增時，將 profile 重置為預設值 'dev'
       setFormData({
         application: '',
-        profile: '',
-        label: '',
-        options: '',
+        profile: 'prod', 
+        label: ' latest',
         key: '',
-        config: '',
-        status: 'active'
+        value: '',
+        status: 'disable'
       });
     }
   }, [config, open]);
@@ -80,39 +78,52 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
                 required
               />
             </div>
+            {/* --- START: 關鍵修改處 --- */}
             <div className="space-y-2">
               <Label htmlFor="profile">環境</Label>
-              <Input
-                id="profile"
-                value={formData.profile}
-                onChange={(e) => handleInputChange('profile', e.target.value)}
-                required
-              />
+              
+                <Select
+                  value={formData.profile}
+                  onValueChange={(value) => handleInputChange('profile', value)}
+                  required
+                >
+                  <SelectTrigger id="profile">
+                    <SelectValue placeholder="請選擇環境" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="dev">dev</SelectItem>
+                    <SelectItem value="prod">prod</SelectItem>
+                    <SelectItem value="staging">staging</SelectItem>
+                  </SelectContent>
+                </Select>
             </div>
+            {/* --- END: 關鍵修改處 --- */}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="space-y-2">
               <Label htmlFor="label">標籤</Label>
-              <Input
-                id="label"
+              {/* 3. 移除條件渲染，統一使用 Select 元件 */}
+              <Select
+                // 3a. 將 value 綁定到 formData.label
                 value={formData.label}
-                onChange={(e) => handleInputChange('label', e.target.value)}
+                // 3b. onValueChange 時更新 'label' 欄位
+                onValueChange={(value) => handleInputChange('label', value)}
                 required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="options">選項</Label>
-              <Input
-                id="options"
-                value={formData.options}
-                onChange={(e) => handleInputChange('options', e.target.value)}
-              />
+              >
+                <SelectTrigger id="label">
+                  <SelectValue placeholder="請選擇標籤" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="latest">latest</SelectItem>
+                  <SelectItem value="candidate">candidate</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="key">鍵值</Label>
+            <Label htmlFor="key">鍵</Label>
             <Input
               id="key"
               value={formData.key}
@@ -122,28 +133,24 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="config">配置內容</Label>
+            <Label htmlFor="config">值</Label>
             <Textarea
               id="config"
-              value={formData.config}
-              onChange={(e) => handleInputChange('config', e.target.value)}
+              value={formData.value}
+              onChange={(e) => handleInputChange('value', e.target.value)}
               className="min-h-[100px]"
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label>狀態</Label>
-            <Select value={formData.status} onValueChange={(value) => handleInputChange('status', value)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="active">啟用中</SelectItem>
-                <SelectItem value="pending">待處理</SelectItem>
-                <SelectItem value="deployed">已部署</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label htmlFor="status">狀態</Label>
+            <Input
+              id="status"
+              value={formData.status} // <--- 修改：綁定到 state 中的 formData.status
+              readOnly
+              className="bg-gray-100 cursor-not-allowed"
+            />
           </div>
 
           <DialogFooter>

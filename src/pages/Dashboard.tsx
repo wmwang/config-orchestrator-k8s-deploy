@@ -37,22 +37,20 @@ const Dashboard = () => {
     if (!acc[config.application]) {
       acc[config.application] = {
         total: 0,
-        deployed: 0,
-        pending: 0,
-        active: 0
+        enable: 0,
+        disable: 0
       };
     }
     acc[config.application].total++;
     acc[config.application][config.status]++;
     return acc;
-  }, {} as Record<string, { total: number; deployed: number; pending: number; active: number }>);
+  }, {} as Record<string, { total: number; enable: number; disable: number}>);
 
   const totalStats = {
     applications: Object.keys(applicationStats).length,
     totalConfigs: configs.length,
-    deployed: configs.filter(c => c.status === 'deployed').length,
-    pending: configs.filter(c => c.status === 'pending').length,
-    active: configs.filter(c => c.status === 'active').length
+    enable: configs.filter(c => c.status === 'enable').length,
+    disable: configs.filter(c => c.status === 'disable').length
   };
 
   const overallStats = [
@@ -70,13 +68,13 @@ const Dashboard = () => {
     },
     {
       title: "已部署",
-      value: totalStats.deployed,
+      value: totalStats.enable,
       icon: Settings,
       color: "text-green-400"
     },
     {
       title: "待處理",
-      value: totalStats.pending,
+      value: totalStats.disable,
       icon: Activity,
       color: "text-yellow-400"
     }
@@ -149,15 +147,11 @@ const Dashboard = () => {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600 dark:text-slate-400">已部署:</span>
-                        <span className="text-green-400 font-medium">{stats.deployed}</span>
+                        <span className="text-green-400 font-medium">{stats.enable}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600 dark:text-slate-400">待處理:</span>
-                        <span className="text-yellow-400 font-medium">{stats.pending}</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-600 dark:text-slate-400">啟用中:</span>
-                        <span className="text-purple-400 font-medium">{stats.active}</span>
+                        <span className="text-yellow-400 font-medium">{stats.disable}</span>
                       </div>
                     </div>
 

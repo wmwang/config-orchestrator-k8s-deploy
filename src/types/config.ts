@@ -2,14 +2,13 @@
 export interface ConfigItem {
   id: string;
   application: string;
-  profile: string;
+  profile: string ;
   label: string;
-  options: string;
   key: string;
-  config: string;
+  value: string;
   createdAt: string;
   updatedAt: string;
-  status: 'active' | 'pending' | 'deployed';
+  status: string ;
 }
 
 export interface DeploymentOption {

@@ -174,7 +174,7 @@ const ApplicationConfig = () => {
     if (selectedConfig) {
       setConfigs(prev => prev.map(config => 
         config.id === selectedConfig.id 
-          ? { ...config, status: deploymentOption.type === 'immediate' ? 'deployed' : 'pending' }
+          ? { ...config, status: deploymentOption.type === 'immediate' ? 'enable' : 'disable' }
           : config
       ));
 
@@ -198,21 +198,15 @@ const ApplicationConfig = () => {
     },
     {
       title: "已部署",
-      value: configs.filter(c => c.status === 'deployed').length,
+      value: configs.filter(c => c.status === 'enable').length,
       icon: Server,
       color: "text-green-400"
     },
     {
       title: "待處理",
-      value: configs.filter(c => c.status === 'pending').length,
+      value: configs.filter(c => c.status === 'disable').length,
       icon: Activity,
       color: "text-yellow-400"
-    },
-    {
-      title: "啟用中",
-      value: configs.filter(c => c.status === 'active').length,
-      icon: Settings,
-      color: "text-purple-400"
     }
   ];
 
@@ -262,7 +256,7 @@ const ApplicationConfig = () => {
         </div>
 
         {/* 統計卡片 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {stats.map((stat, index) => (
             <Card key={index} className="bg-white border-slate-200 dark:bg-slate-800/50 dark:border-slate-700">
               <CardContent className="p-6">

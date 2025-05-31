@@ -1,30 +1,6 @@
 {
   "configs": [
     {
-      "id": "1",
-      "application": "user-service",
-      "profile": "production",
-      "label": "candidate",
-      "options": "--reload",
-      "key": "database.host",
-      "config": "postgresql://prod-db:5432/userdb",
-      "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2025-05-30T15:48:49.586Z",
-      "status": "deployed"
-    },
-    {
-      "id": "2",
-      "application": "api-gateway",
-      "profile": "staging",
-      "label": "v2.1.0",
-      "options": "--debug",
-      "key": "redis.cache.ttl",
-      "config": "3600",
-      "createdAt": "2024-01-18T09:15:00Z",
-      "updatedAt": "2024-01-22T11:20:00Z",
-      "status": "active"
-    },
-    {
       "id": "3",
       "application": "auth-service",
       "profile": "development",
@@ -34,7 +10,7 @@
       "config": "dev-secret-key-change-in-prod",
       "createdAt": "2024-01-20T16:00:00Z",
       "updatedAt": "2024-01-23T08:30:00Z",
-      "status": "pending"
+      "status": "disable"
     },
     {
       "id": "4",
@@ -46,7 +22,7 @@
       "config": "dev-secret-key-change-in-prod",
       "createdAt": "2024-01-20T16:00:00Z",
       "updatedAt": "2024-01-23T08:30:00Z",
-      "status": "pending"
+      "status": "disable"
     },
     {
       "id": "1748619673728",
@@ -56,7 +32,7 @@
       "options": "123",
       "key": "Latest_version",
       "config": "1.1.0",
-      "status": "active",
+      "status": "enable",
       "createdAt": "2025-05-30T15:41:13.728Z",
       "updatedAt": "2025-05-30T15:41:13.728Z"
     },
@@ -68,9 +44,104 @@
       "options": "123",
       "key": "candidate_version",
       "config": "1.1.1",
-      "status": "active",
+      "status": "enable",
       "createdAt": "2025-05-30T15:42:13.880Z",
       "updatedAt": "2025-05-30T15:42:23.145Z"
+    },
+    {
+      "id": "d36c",
+      "application": "user-service",
+      "profile": "production",
+      "options": "123",
+      "key": "Latest_version",
+      "config": "1.1.0",
+      "status": "enable",
+      "label": [
+        "candidate"
+      ]
+    },
+    {
+      "id": "0513",
+      "application": "user-service",
+      "profile": "production",
+      "options": "123",
+      "key": "candidate_version",
+      "config": "1.1.1",
+      "status": "enable",
+      "label": [
+        "candidate"
+      ]
+    },
+    {
+      "id": "1748661723895",
+      "application": "api-gateway",
+      "profile": "dev",
+      "label": "latest",
+      "options": "",
+      "key": "123",
+      "config": "sdfsldkfjl",
+      "status": "enable",
+      "createdAt": "2025-05-31T03:22:03.895Z",
+      "updatedAt": "2025-05-31T16:12:14.640Z"
+    },
+    {
+      "id": "378a",
+      "application": "api-gateway",
+      "profile": "prod",
+      "options": "",
+      "key": "123",
+      "config": "sdfsldkfjl",
+      "status": "enable",
+      "label": "latest",
+      "updatedAt": "2025-05-31T16:13:17.970Z",
+      "value": "sdfsfds"
+    },
+    {
+      "id": "1748705984867",
+      "application": "api-gateway",
+      "profile": "dev",
+      "label": "latest",
+      "key": "sdlfkj",
+      "value": "sdlfkjlk",
+      "status": "enable",
+      "createdAt": "2025-05-31T15:39:44.867Z",
+      "updatedAt": "2025-05-31T16:12:45.289Z"
+    },
+    {
+      "id": "832c",
+      "application": "api-gateway",
+      "profile": "dev",
+      "options": "",
+      "key": "123",
+      "config": "sdfsldkfjl",
+      "status": "active",
+      "label": [
+        "candidate"
+      ]
+    },
+    {
+      "id": "9313",
+      "application": "api-gateway",
+      "profile": "prod",
+      "options": "",
+      "key": "123",
+      "config": "sdfsldkfjl",
+      "status": "active",
+      "value": "sdfsfds",
+      "label": [
+        "candidate"
+      ]
+    },
+    {
+      "id": "f5ed",
+      "application": "api-gateway",
+      "profile": "dev",
+      "key": "sdlfkj",
+      "value": "sdlfkjlk",
+      "status": "active",
+      "label": [
+        "candidate"
+      ]
     }
   ]
 }
