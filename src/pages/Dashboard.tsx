@@ -6,7 +6,6 @@ import { Server, Database, Settings, Activity, ArrowRight } from 'lucide-react';
 import { ConfigItem } from '@/types/config';
 import ThemeToggle from '@/components/ThemeToggle';
 
-// 模擬數據 - 實際應用中這些數據會從API獲取
 
 const Dashboard = () => {
 
@@ -17,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchConfigs = async () => {
       try {
-        const response = await fetch('http://localhost:3001/configs');
+        const response = await fetch('http://localhost:3000/configs');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -29,7 +28,6 @@ const Dashboard = () => {
         setLoading(false);
       }
     };
-
     fetchConfigs();
   }, []); // Empty dependency array ensures this runs once on mount
 

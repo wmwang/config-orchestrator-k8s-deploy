@@ -1,52 +1,76 @@
 {
-    "configs": [
-      {
-        "id": "1",
-        "application": "user-service",
-        "profile": "production",
-        "label": "v1.2.0",
-        "options": "--reload",
-        "key": "database.host",
-        "config": "postgresql://prod-db:5432/userdb",
-        "createdAt": "2024-01-15T10:30:00Z",
-        "updatedAt": "2024-01-20T14:45:00Z",
-        "status": "deployed"
-      },
-      {
-        "id": "2",
-        "application": "api-gateway",
-        "profile": "staging",
-        "label": "v2.1.0",
-        "options": "--debug",
-        "key": "redis.cache.ttl",
-        "config": "3600",
-        "createdAt": "2024-01-18T09:15:00Z",
-        "updatedAt": "2024-01-22T11:20:00Z",
-        "status": "active"
-      },
-      {
-        "id": "3",
-        "application": "auth-service",
-        "profile": "development",
-        "label": "v1.0.0-beta",
-        "options": "--hot-reload",
-        "key": "jwt.secret",
-        "config": "dev-secret-key-change-in-prod",
-        "createdAt": "2024-01-20T16:00:00Z",
-        "updatedAt": "2024-01-23T08:30:00Z",
-        "status": "pending"
-      },
-      {
-        "id": "4",
-        "application": "auth-service",
-        "profile": "development2",
-        "label": "v1.0.0-beta2",
-        "options": "--hot-reload2",
-        "key": "jwt.secret",
-        "config": "dev-secret-key-change-in-prod",
-        "createdAt": "2024-01-20T16:00:00Z",
-        "updatedAt": "2024-01-23T08:30:00Z",
-        "status": "pending"
-      }
-    ]
-  }
+  "configs": [
+    {
+      "id": "1",
+      "application": "user-service",
+      "profile": "production",
+      "label": "candidate",
+      "options": "--reload",
+      "key": "database.host",
+      "config": "postgresql://prod-db:5432/userdb",
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2025-05-30T15:48:49.586Z",
+      "status": "deployed"
+    },
+    {
+      "id": "2",
+      "application": "api-gateway",
+      "profile": "staging",
+      "label": "v2.1.0",
+      "options": "--debug",
+      "key": "redis.cache.ttl",
+      "config": "3600",
+      "createdAt": "2024-01-18T09:15:00Z",
+      "updatedAt": "2024-01-22T11:20:00Z",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "application": "auth-service",
+      "profile": "development",
+      "label": "v1.0.0-beta",
+      "options": "--hot-reload",
+      "key": "jwt.secret",
+      "config": "dev-secret-key-change-in-prod",
+      "createdAt": "2024-01-20T16:00:00Z",
+      "updatedAt": "2024-01-23T08:30:00Z",
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "application": "auth-service",
+      "profile": "development2",
+      "label": "v1.0.0-beta2",
+      "options": "--hot-reload2",
+      "key": "jwt.secret",
+      "config": "dev-secret-key-change-in-prod",
+      "createdAt": "2024-01-20T16:00:00Z",
+      "updatedAt": "2024-01-23T08:30:00Z",
+      "status": "pending"
+    },
+    {
+      "id": "1748619673728",
+      "application": "user-service",
+      "profile": "production",
+      "label": "latest",
+      "options": "123",
+      "key": "Latest_version",
+      "config": "1.1.0",
+      "status": "active",
+      "createdAt": "2025-05-30T15:41:13.728Z",
+      "updatedAt": "2025-05-30T15:41:13.728Z"
+    },
+    {
+      "id": "1748619733880",
+      "application": "user-service",
+      "profile": "production",
+      "label": "latest",
+      "options": "123",
+      "key": "candidate_version",
+      "config": "1.1.1",
+      "status": "active",
+      "createdAt": "2025-05-30T15:42:13.880Z",
+      "updatedAt": "2025-05-30T15:42:23.145Z"
+    }
+  ]
+}

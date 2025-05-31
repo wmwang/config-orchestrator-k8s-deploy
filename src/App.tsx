@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ThemeProvider from "./components/ThemeProvider";
 import Dashboard from "./pages/Dashboard";
 import ApplicationConfig from "./pages/ApplicationConfig";
+import VersionConfig from "./pages/VersionConfig"
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/app/:appName" element={<ApplicationConfig />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/Version/:appName" element={<VersionConfig />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
