@@ -41,14 +41,15 @@
     {
       "id": "1748619733880",
       "application": "user-service",
-      "profile": "production",
+      "profile": "dev",
       "label": "latest",
       "options": "123",
       "key": "candidate_version",
       "config": "1.1.1",
       "status": "enable",
       "createdAt": "2025-05-30T15:42:13.880Z",
-      "updatedAt": "2025-05-30T15:42:23.145Z"
+      "updatedAt": "2025-06-01T09:42:17.085Z",
+      "value": "sdfsfsfs"
     },
     {
       "id": "d36c",
@@ -75,54 +76,74 @@
       ]
     },
     {
-      "id": "1748661723895",
+      "id": "af3b",
       "application": "api-gateway",
       "profile": "dev",
-      "label": "latest",
       "options": "",
       "key": "123",
       "config": "sdfsldkfjl",
       "status": "enable",
-      "createdAt": "2025-05-31T03:22:03.895Z",
-      "updatedAt": "2025-05-31T16:12:14.640Z"
+      "label": "candidate",
+      "value": "pdfssdflskfjlsd",
+      "updatedAt": "2025-06-01T14:31:01.789Z"
     },
     {
-      "id": "378a",
+      "id": "c590",
+      "application": "api-gateway",
+      "profile": "dev",
+      "key": "sdlfkj",
+      "value": "sdlfkjlk",
+      "status": "enable",
+      "label": "candidate",
+      "updatedAt": "2025-06-01T09:32:39.013Z"
+    },
+    {
+      "id": "842b",
       "application": "api-gateway",
       "profile": "prod",
       "options": "",
       "key": "123",
       "config": "sdfsldkfjl",
       "status": "enable",
-      "label": "latest",
-      "updatedAt": "2025-05-31T16:13:17.970Z",
-      "value": "sdfsfds"
+      "value": "sdfsfds",
+      "label": "candidate",
+      "updatedAt": "2025-06-01T09:32:53.731Z"
     },
     {
-      "id": "1748705984867",
+      "id": "1748770293515",
       "application": "api-gateway",
-      "profile": "dev",
-      "label": "latest",
-      "key": "sdlfkj",
-      "value": "sdlfkjlk",
-      "status": "enable",
-      "createdAt": "2025-05-31T15:39:44.867Z",
-      "updatedAt": "2025-05-31T16:12:45.289Z"
+      "profile": "prod",
+      "label": "candidate",
+      "key": "kewlk",
+      "value": "sldkfjsldkfjsl",
+      "status": "disable",
+      "createdAt": "2025-06-01T09:31:33.515Z",
+      "updatedAt": "2025-06-01T09:31:33.515Z"
     },
     {
-      "id": "b85a",
+      "id": "0990",
       "application": "api-gateway",
       "profile": "dev",
       "options": "",
       "key": "123",
       "config": "sdfsldkfjl",
+      "status": "enable",
+      "label": "latest",
+      "updatedAt": "2025-06-01T09:32:58.829Z"
+    },
+    {
+      "id": "9abe",
+      "application": "api-gateway",
+      "profile": "dev",
+      "key": "sdlfkj",
+      "value": "sdlfkjlk",
       "status": "active",
       "label": [
-        "candidate"
+        "latest"
       ]
     },
     {
-      "id": "0869",
+      "id": "9e14",
       "application": "api-gateway",
       "profile": "prod",
       "options": "",
@@ -131,18 +152,18 @@
       "status": "active",
       "value": "sdfsfds",
       "label": [
-        "candidate"
+        "latest"
       ]
     },
     {
-      "id": "490c",
+      "id": "0a7b",
       "application": "api-gateway",
-      "profile": "dev",
-      "key": "sdlfkj",
-      "value": "sdlfkjlk",
+      "profile": "prod",
+      "key": "kewlk",
+      "value": "sldkfjsldkfjsl",
       "status": "active",
       "label": [
-        "candidate"
+        "latest"
       ]
     }
   ]

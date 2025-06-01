@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, ArrowLeft, Server, Database, Settings, Activity } from 'lucide-react';
+import { Plus, ArrowLeft, Server, Database, Settings, Activity, GitBranch, GitBranchIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import ConfigTable from '@/components/ConfigTable';
 import ConfigDialog from '@/components/ConfigDialog';
@@ -249,6 +249,8 @@ const ApplicationConfig = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             <Link to={`/Version/${appName}`}>
+
+            <GitBranchIcon  className="h-4 w-4 mr-2" />
               藍綠部署版本管理
             </Link>
           </Button>
