@@ -3,14 +3,15 @@
     {
       "id": "3",
       "application": "auth-service",
-      "profile": "development",
-      "label": "v1.0.0-beta",
+      "profile": "dev",
+      "label": "latest",
       "options": "--hot-reload",
       "key": "jwt.secret",
       "config": "dev-secret-key-change-in-prod",
       "createdAt": "2024-01-20T16:00:00Z",
-      "updatedAt": "2024-01-23T08:30:00Z",
-      "status": "disable"
+      "updatedAt": "2025-06-01T07:04:27.790Z",
+      "status": "disable",
+      "value": "werwrwer"
     },
     {
       "id": "4",
@@ -109,7 +110,7 @@
       "updatedAt": "2025-05-31T16:12:45.289Z"
     },
     {
-      "id": "365a",
+      "id": "b85a",
       "application": "api-gateway",
       "profile": "dev",
       "options": "",
@@ -121,7 +122,7 @@
       ]
     },
     {
-      "id": "eacd",
+      "id": "0869",
       "application": "api-gateway",
       "profile": "prod",
       "options": "",
@@ -134,7 +135,7 @@
       ]
     },
     {
-      "id": "17e0",
+      "id": "490c",
       "application": "api-gateway",
       "profile": "dev",
       "key": "sdlfkj",
