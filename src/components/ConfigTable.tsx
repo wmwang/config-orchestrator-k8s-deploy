@@ -48,7 +48,7 @@ const ConfigTable: React.FC<ConfigTableProps> = ({ configs, onEdit, onDelete, on
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'enable': return 'bg-green-500/20 text-green-400 border-green-500/50';
-      case 'disable': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
+      case 'disable': return 'bg-red-500/20 text-red-400 border-red-500/50';
       default: return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
     }
   };

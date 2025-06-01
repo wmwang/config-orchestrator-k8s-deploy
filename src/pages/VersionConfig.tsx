@@ -236,13 +236,13 @@ const ApplicationConfig = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button asChild variant="ghost" size="sm" className="text-slate-400 hover:text-slate-200 hover:bg-slate-700">
-              <Link to="/">
+              <Link to={`/app/${appName}`}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                返回儀表板
+                返回配置管理
               </Link>
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-slate-100 mb-2">{appName} 配置管理</h1>
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">{appName} 配置管理</h1>
               <p className="text-slate-400">管理 {appName} 應用程式的所有配置項目</p>
             </div>
           </div>

@@ -145,12 +145,22 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, onOpenChange, config,
 
           <div className="space-y-2">
             <Label htmlFor="status">狀態</Label>
-            <Input
-              id="status"
-              value={formData.status} // <--- 修改：綁定到 state 中的 formData.status
-              readOnly
-              className="bg-gray-100 cursor-not-allowed"
-            />
+            <Select
+              // 3a. 將 value 綁定到 formData.label
+              value={formData.status}
+              // 3b. onValueChange 時更新 'label' 欄位
+              onValueChange={(value) => handleInputChange('status', value)}
+              required
+              disabled={config && config.status === 'disable'}
+            >
+              <SelectTrigger id="status">
+                <SelectValue placeholder="請選擇狀態" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="enable">enable</SelectItem>
+                <SelectItem value="disable">disable</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <DialogFooter>

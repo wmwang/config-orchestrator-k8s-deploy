@@ -27,14 +27,15 @@
     {
       "id": "1748619673728",
       "application": "user-service",
-      "profile": "production",
-      "label": "latest",
+      "profile": "dev",
+      "label": "candidate",
       "options": "123",
       "key": "Latest_version",
       "config": "1.1.0",
-      "status": "enable",
+      "status": "disable",
       "createdAt": "2025-05-30T15:41:13.728Z",
-      "updatedAt": "2025-05-30T15:41:13.728Z"
+      "updatedAt": "2025-06-01T04:24:25.983Z",
+      "value": "sdc"
     },
     {
       "id": "1748619733880",
@@ -108,7 +109,7 @@
       "updatedAt": "2025-05-31T16:12:45.289Z"
     },
     {
-      "id": "832c",
+      "id": "365a",
       "application": "api-gateway",
       "profile": "dev",
       "options": "",
@@ -120,7 +121,7 @@
       ]
     },
     {
-      "id": "9313",
+      "id": "eacd",
       "application": "api-gateway",
       "profile": "prod",
       "options": "",
@@ -133,7 +134,7 @@
       ]
     },
     {
-      "id": "f5ed",
+      "id": "17e0",
       "application": "api-gateway",
       "profile": "dev",
       "key": "sdlfkj",
